@@ -1,7 +1,37 @@
 body{
     padding: auto;
     margin: 0 auto;
-    width: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    font-family: Helvetica;
+    font-weight: bolder;
+}
+#search{
+    grid-column: 2/3;
+    grid-row: 1/2;
 }
 
+#weather{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
 
+.hot{
+    color: #dc2f02;
+    background-color: #ffe7ad;
+}
+
+.cold{
+    color: #00b4d8;
+    background-color: #caf0f8;
+
+}
+
+#footer{
+    font-family:'Times New Roman', Times, serif;
+    font-size: small;
+    font-weight: lighter;
+    grid-column: 2/3;
+    grid-row: 3/3;
+}

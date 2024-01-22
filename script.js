@@ -19,28 +19,44 @@ async function getWeather(event, location){
 
 }
 
-function displayWeather(location,condition,feel,temp,wind){
+async function displayWeather(location,condition,feel,temp,wind){
     const weatherDiv = document.getElementById("weather");
+    weatherDiv.replaceChildren();
+
 
     const locale = document.createElement("h1");
     locale.textContent = location;
     weatherDiv.appendChild(locale);
 
+    const conditionImage = document.createElement("img");
+    weatherDiv.appendChild(conditionImage);
+
     const currWeather = document.createElement("p");
-    currWeather.textContent = "It is " + condition + " with a temperature of " + temp + " degrees, it feels like " + feel + " degrees and the wind is " + wind + " mph.";
+    currWeather.textContent = condition + " with a temperature of " + temp + " degrees, it feels like " + feel + " degrees and the wind is " + wind + " mph.";
     weatherDiv.appendChild(currWeather);
 
     if (temp > 80){
         weatherDiv.classList.add("hot");
+        weatherDiv.classList.remove("cold");
     }else if(temp < 40){
         weatherDiv.classList.add("cold");
+        weatherDiv.classList.remove("hot");
     }else{
-        if (weatherDiv.classList.contains("hot")){
+        
             weatherDiv.classList.remove("hot");
-        }else if(weatherDiv.classList.contains("cold")){
+        
             weatherDiv.classList.remove("cold");
-        }
+        
     }
+
+    const imgData = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=sH7c268lbaklFUcjxL2Zy6PtUr1oGtqh&s=' + condition, {mode: 'cors'});
+    gifData = await imgData.json();
+    conditionImage.src = gifData.data.images.original.url;
+
+
+
+
+
 
     // find nice way to display the conditions, color coding for temp, maybe adding raindrops/snowflakes for weather. wind etc.
     // your code up to now displays the city name and, and logs the weather. 
